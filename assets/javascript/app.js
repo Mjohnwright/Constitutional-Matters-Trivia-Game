@@ -4,15 +4,18 @@
 
 
 
-// PsuedoCode
+/******************************************************
+                PSUEDOCODE                
+****************************************************/
 
-// Jumbotron 
+//     On page load the screen displays a Jumbotron with.....
 //     Title of Game
 //     Start button - click
 
-//     Timer Starts - downward
+//     Ob click
+//     Timer appear and Starts - downward also.....
 //     List of Questions appears
-//         Each question is centered on the page and has 4 radial options for answers
+//     Each question is centered on the page and has 4 radial options for answers
 //     Done button at bottom of page to stop timer and record score
 
 //     Answering questions:
@@ -22,74 +25,55 @@
 //     When timer hits zero:
 //         Jumbotron is rewritten with:
 //             All Done!
-//             Correct answers
-//             Incorrect answers
-//             Unanswered
+//             Correct answers: 4
+//             Incorrect answers: 4
+//             Unanswered: 2
 
 /****************************************
               VARIABLES                      
 *****************************************/
 
-firstQuest = {
+questionsAndAnswers = {
     Quest1: 'what is the capital of PA?',
-    answer1: 'Harrisburg',
-    answer2: 'Augusta',
-    answer3: 'Jefferson City',
-    answer4: 'Sacramento',
-    // answer1: true,
-};
-secondQuesObj = {
+    answerA1: 'Harrisburg',
+    answerA2: 'Augusta',
+    answerA3: 'Jefferson City',
+    answerA4: 'Sacramento',
+
     Quest2: 'what is the legal voting age?',
-    answer1: '16',
-    answer2: '21',
-    answer3: '18',
-    answer4: '65',
-    answer3: true,
+    answerB1: '16',
+    answerB2: '21',
+    answerB3: '18',
+    answerB4: '65',
 };
 
-var visualTimer = $("#timer" ).html(gameTimer);
-
-var gameTimer;
-
-// var timeIsUp = setTimeout(function() {
-//     alert("Time is up");
-// }, 1000 * 5);
-
-$(".jumbotron").on('click', function(){
-
-/****************************************
-              FUNCTIONS                      
-*****************************************/
-
-gameTimer = setTimeout(function() {
-    console.log("time is up");
-}, 1000 * 5);
-    if (gameTimer === 0){
-        // console.log("Times Up");
-    }
+correctAnswers = 0;
+incorrectAnswers = 0;
+unAnswered = 0;
 
 
 
-/****************************************
-        WRITING TO THE DOM                      
-*****************************************/
+$(".jumbotron").on('click', function () {  //clicking the start game button launches a new page and starts the timer
 
-$("#question1").text(firstQuest.Quest1);
-$("#answer1").text(firstQuest.answer1);
-$("#answer2").text(firstQuest.answer2);
-$("#answer3").text(firstQuest.answer3);
-$("#answer4").text(firstQuest.answer4);
+
+
+    /****************************************
+                  FUNCTIONS                      
+    *****************************************/
+    $("#container").load('Bhtml.html'); //Cannot figure how to get ALL questions and answers to write to the DOM
+    //If I write them in HTML I do not know how to make them appear after the page loads.
+
+    setTimeout(function () {
+    }, 1000 * 5); //using 5 secs for testing purposes...will change this later
 
 });
 
 
 
 
-
-    // $(".jumbotron").on('click', function() {
-    //     console.log("Handler for .click() called.");
-
-
+    /****************************************
+            WRITING TO THE DOM                      
+    *****************************************/
 
 
 
@@ -97,16 +81,5 @@ $("#answer4").text(firstQuest.answer4);
 
 
 
-    //         function myFunction() {
-    //             setTimeout(function(){ alert("Hello"); }, 3000);
-    //         }
 
-    //     };
-    //     function gameTimer(){
-
-    //         var seconds = 30;
-    //         windows.setTimeout(, milliseconds);
-    //     }
-    //     gameTimer;
-    // });
 

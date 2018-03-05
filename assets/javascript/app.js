@@ -47,7 +47,7 @@ $(document).ready(function() {
     {
       Quest: "What is the capital of PA?",
       answers: ["Harrisburg", "Augusta", "Jefferson City", "Sacramento"],
-      correctAns: "Harrisburg"
+      correctAns: 0
     },
 
     {
@@ -57,8 +57,7 @@ $(document).ready(function() {
     }
   ];
 
-  var timeRemaining;
-  var counter = 10;
+  var counter = 3;
   var correctAnswers = 0;
   var incorrectAnswers = 0;
   var unAnswered = 0;
@@ -74,75 +73,58 @@ $(document).ready(function() {
 
   startGame();
 
-
   //CLICK TO START THE GAME
   //clicking starts the timer countdown and loads the question
-  $('.timerPanel').click(function() {
+  $(".timerPanel").click(function() {
     console.log("it works");
 
     countDown();
-    // clickToEnd();
-    $('.clickToEndPanel').html('<button type="button" class="btn btn-default">Finished</button>');
 
+    // clickToEnd();
+    //THIS DOES NOT WORK
+    $(".clickToEndPanel").html(
+      '<button type="button" class="btn btn-default">Finished</button>'
+    );
 
     //LOOP to cycle through all the questions
     for (var i = 0; i < questionsAndAnswers.length; i++) {
       //APPENDS the DOM with QUESTION
+      // console.log(i)
       $(".mainPanel").append("<h2>" + questionsAndAnswers[i].Quest + "</h2>");
 
       //LOOP to cycle through all the answers
       for (var z = 0; z < questionsAndAnswers[i].answers.length; z++) {
+        // console.log(z);
         //APPENDS the DOM with ANSWERS (loops the length of the questionAndAnswers array)
-        $(".mainPanel").append(
-          '<input type="radio" name="answer">' +
-            questionsAndAnswers[i].answers[z] +
-            "</input>"
-        )
+        $(".mainPanel").append("<input type='radio' name='answer=' + i + 'value=' + z + '>'" + questionsAndAnswers[i].answers[z] + "</input>");
+
+          // “<input type=‘radio’ name=‘question-” + i + “’ value=’” +…
+        
       }
     }
+    //closes my click button for timer function
+  });
 
-
-
-        //buttonObject.value = text
-
-
-    
-      
   /****************************************
                   FUNCTIONS                      
 *****************************************/
 
-//the timer...writed the clock to the DOM
-function countDown()
-{
+  //the timer...write the timer to the DOM
+  function countDown() {
     timeRemaining = setInterval(timerAmount, 1000);
+
     function timerAmount() {
       if (counter > 0) {
         counter--;
         $(".timerPanel").html("<p>" + "Time Left: " + counter + "</p>");
         console.log(counter);
       } else {
-        finalResults();
+        endOfGame();
       }
     }
   }
 
-  //If user clicks to end game before timer expired
-  function clickToEnd() {
-    $('.clickToEndPanel').html('<button type="button" class="btn btn-default">Finished</button>');
-    // $('.clickToEndPanel').click(endOfGame());
-
-    //onclick.....
-  }
-
-  function finalResults() {
-    htmlText = "<p>" + "Correct Answers: " + correctAnswers + "</p>";
-    $(".timerPanel").html(
-      "<p>" + "Correct Answers: " + correctAnswers + "</p>"
-    );
-  }
-
-  //If timer expires 
+  //If timer expires
   function endOfGame() {
     htmlText = "<p>" + "Correct Answers: " + correctAnswers + "</p>";
     $(".timerPanel").html(
@@ -151,24 +133,35 @@ function countDown()
     $(".mainPanel").hide();
   }
 
-  function gameReset() {
-    counter = 4;
-    correctAnswers = 0;
-    incorrectAnswers = 0;
-    unAnswered = 0;
+  //If user clicks to end game before timer expired
+  //THIS DOES NOT WORK
+  function clickToEnd() {
+    $(".clickToEndPanel").html(
+      '<button type="button" class="btn btn-default">Finished</button>'
+    );
+    // $('.clickToEndPanel').click(endOfGame());
+
+    //onclick.....
   }
 
+  function finalTally() {
+    for (var i = 0; i < questionsAndAnswers.length; i++) {
+      for (var z = 0; i < questionsAndAnswers.length; z++) {
+        if (
+          (questionsAndAnswers[i].correctAns =
+            questionsAndAnswers[i].answers[z])
+        ) {
+          correctAnswers++;
+        } else if (
+          questionsAndAnswers[i].correctAns != questionsAndAnswers[i].answers[z]
+        ) {
+          incorrectAnswers++;
+        } else {
+          unAnswered++;
+        }
+      }
+    }
+  }
 
-}); //closes my click button for timer function
-
-// if (questionsAndAnswers[i].answers[z] = correctanswer) {
-//   correctAnswers++;
-
-// } else if (questionsAndAnswers[i].answers[z] != correctanswer ){
-//   incorrectAnswers++;
-// } else {
-//   unAnswered++;
-// };
-
-
-}); //closes my document ready function
+  //closes my document ready function
+});

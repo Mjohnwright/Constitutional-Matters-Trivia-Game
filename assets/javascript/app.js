@@ -49,7 +49,7 @@
 
         //CLICK TO START THE GAME
         //clicking starts the timer countdown and loads the question
-        $(".timerPanel").html('<button type="button" class="btn btn-default">Click to Start</button>');
+        $(".timerPanel").html('<button type="button" id ="button" class="btn btn-default">Click to Start</button>');
 
         //DEFINES what happens when THE CLICK to Start button is clicked
         $(".timerPanel").click(function () {
@@ -90,6 +90,7 @@
 
         //FUNTION TO START RUNNING GAME
         function startGame() {
+          
           $(".timerPanel").html('<button type="button" class="btn btn-default">Click to Start</button>');
           countDown();
         }
